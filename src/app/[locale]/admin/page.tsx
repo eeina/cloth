@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Header } from '@/components/layout/Header';
+import { AdminRoute } from '@/components/auth/AdminRoute';
+import { ProductForm } from '@/components/admin/ProductForm';
 import { 
   BarChart3, 
   Package, 
@@ -16,11 +18,66 @@ import {
   Trash2
 } from 'lucide-react';
 
-export default function AdminDashboard() {
+function AdminDashboardContent() {
   const t = useTranslations();
   const locale = useLocale();
 
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [showProductForm, setShowProductForm] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<any>(null);
+
+  const fetchProducts = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/admin/products');
+      if (response.ok) {
+        const data = await response.json();
+        setProducts(data.products || []);
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === 'products') {
+      fetchProducts();
+    }
+  }, [activeTab]);
+
+  const handleProductSuccess = () => {
+    fetchProducts();
+  };
+
+  const handleEditProduct = (product: any) => {
+    setEditingProduct(product);
+    setShowProductForm(true);
+  };
+
+  const handleDeleteProduct = async (productId: string) => {
+    if (!confirm(locale === 'ar' ? 'هل أنت متأكد من حذف هذا المنتج؟' : 'Are you sure you want to delete this product?')) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/admin/products/${productId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        fetchProducts();
+      } else {
+        alert(locale === 'ar' ? 'فشل حذف المنتج' : 'Failed to delete product');
+      }
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      alert(locale === 'ar' ? 'فشل حذف المنتج' : 'Failed to delete product');
+    }
+  };
 
   const stats = [
     {
@@ -63,12 +120,6 @@ export default function AdminDashboard() {
     { id: '#1235', customer: 'Fatima Ali', total: 156, status: 'processing' },
     { id: '#1236', customer: 'Noura Hassan', total: 890, status: 'shipped' },
     { id: '#1237', customer: 'Maryam Omar', total: 234, status: 'pending' },
-  ];
-
-  const sampleProducts = [
-    { id: '1', name: 'Elegant Black Abaya', name_ar: 'عباءة سوداء أنيقة', price: 299, stock: 45, category: 'Abaya' },
-    { id: '2', name: 'Premium Silk Hijab', name_ar: 'حجاب حريري فاخر', price: 89, stock: 123, category: 'Hijab' },
-    { id: '3', name: 'Modest Evening Dress', name_ar: 'فستان سهرة محتشم', price: 459, stock: 23, category: 'Dresses' },
   ];
 
   const getStatusColor = (status: string) => {
@@ -247,7 +298,10 @@ export default function AdminDashboard() {
                 <h1 className="text-2xl font-bold text-gray-900">
                   {t('admin.products')}
                 </h1>
-                <button className="flex items-center space-x-2 rtl:space-x-reverse px-4 py-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-colors">
+                <button 
+                  onClick={() => setShowProductForm(true)}
+                  className="flex items-center space-x-2 rtl:space-x-reverse px-4 py-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-colors"
+                >
                   <Plus size={20} />
                   <span>{locale === 'ar' ? 'إضافة منتج' : 'Add Product'}</span>
                 </button>
@@ -276,44 +330,64 @@ export default function AdminDashboard() {
                       </tr>
                     </thead>
                     <tbody>
-                      {sampleProducts.map((product) => (
-                        <tr key={product.id} className="border-b border-gray-100">
-                          <td className="px-6 py-4">
-                            <div className="text-sm font-medium text-gray-900">
-                              {locale === 'ar' ? product.name_ar : product.name}
-                            </div>
-                            <div className="text-sm text-gray-600">ID: {product.id}</div>
-                          </td>
-                          <td className="px-6 py-4 text-sm text-gray-700">
-                            {product.category}
-                          </td>
-                          <td className="px-6 py-4 text-sm text-gray-700">
-                            {product.price} {t('common.currency')}
-                          </td>
-                          <td className="px-6 py-4">
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              product.stock > 20 ? 'bg-green-100 text-green-800' :
-                              product.stock > 5 ? 'bg-yellow-100 text-yellow-800' :
-                              'bg-red-100 text-red-800'
-                            }`}>
-                              {product.stock} {locale === 'ar' ? 'قطعة' : 'items'}
-                            </span>
-                          </td>
-                          <td className="px-6 py-4">
-                            <div className="flex space-x-2 rtl:space-x-reverse">
-                              <button className="text-blue-600 hover:text-blue-800">
-                                <Eye size={16} />
-                              </button>
-                              <button className="text-rose-600 hover:text-rose-800">
-                                <Edit size={16} />
-                              </button>
-                              <button className="text-red-600 hover:text-red-800">
-                                <Trash2 size={16} />
-                              </button>
-                            </div>
+                      {loading ? (
+                        <tr>
+                          <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
+                            {locale === 'ar' ? 'جاري التحميل...' : 'Loading...'}
                           </td>
                         </tr>
-                      ))}
+                      ) : products.length === 0 ? (
+                        <tr>
+                          <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
+                            {locale === 'ar' ? 'لا توجد منتجات' : 'No products found'}
+                          </td>
+                        </tr>
+                      ) : (
+                        products.map((product) => (
+                          <tr key={product.id} className="border-b border-gray-100">
+                            <td className="px-6 py-4">
+                              <div className="text-sm font-medium text-gray-900">
+                                {locale === 'ar' ? product.name_ar : product.name}
+                              </div>
+                              <div className="text-sm text-gray-600">ID: {product.id}</div>
+                            </td>
+                            <td className="px-6 py-4 text-sm text-gray-700">
+                              {product.category}
+                            </td>
+                            <td className="px-6 py-4 text-sm text-gray-700">
+                              {product.price} {t('common.currency')}
+                            </td>
+                            <td className="px-6 py-4">
+                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                product.inStock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                              }`}>
+                                {product.inStock 
+                                  ? (locale === 'ar' ? 'متوفر' : 'In Stock') 
+                                  : (locale === 'ar' ? 'غير متوفر' : 'Out of Stock')
+                                }
+                              </span>
+                            </td>
+                            <td className="px-6 py-4">
+                              <div className="flex space-x-2 rtl:space-x-reverse">
+                                <button 
+                                  onClick={() => handleEditProduct(product)}
+                                  className="text-blue-600 hover:text-blue-800"
+                                  title={locale === 'ar' ? 'تحرير' : 'Edit'}
+                                >
+                                  <Edit size={16} />
+                                </button>
+                                <button 
+                                  onClick={() => handleDeleteProduct(product.id)}
+                                  className="text-red-600 hover:text-red-800"
+                                  title={locale === 'ar' ? 'حذف' : 'Delete'}
+                                >
+                                  <Trash2 size={16} />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -388,6 +462,25 @@ export default function AdminDashboard() {
           )}
         </div>
       </div>
+
+      {/* Product Form Modal */}
+      <ProductForm
+        isOpen={showProductForm}
+        onClose={() => {
+          setShowProductForm(false);
+          setEditingProduct(null);
+        }}
+        onSuccess={handleProductSuccess}
+        product={editingProduct}
+      />
     </div>
+  );
+}
+
+export default function AdminDashboard() {
+  return (
+    <AdminRoute>
+      <AdminDashboardContent />
+    </AdminRoute>
   );
 }
