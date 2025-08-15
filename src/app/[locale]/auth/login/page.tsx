@@ -36,10 +36,10 @@ export default function LoginPage() {
     setError('');
 
     try {
-      const { error } = await signIn(formData.email, formData.password);
+      const result = await signIn(formData.email, formData.password);
       
-      if (error) {
-        setError(error.message);
+      if (!result.success) {
+        setError(result.error || 'Login failed');
       } else {
         router.push(`/${locale}/account`);
       }

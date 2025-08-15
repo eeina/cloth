@@ -7,61 +7,44 @@ import { ProductCard } from '../../components/ui/ProductCard';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-// Sample product data
-const sampleProducts = [
-  {
-    id: '1',
-    name: 'Elegant Black Abaya',
-    name_ar: 'عباءة سوداء أنيقة',
-    price: 299,
-    image: 'https://images.pexels.com/photos/7034217/pexels-photo-7034217.jpeg',
-    category: 'abaya',
-    sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Black', 'Navy'],
-    inStock: true,
-  },
-  {
-    id: '2',
-    name: 'Premium Silk Hijab',
-    name_ar: 'حجاب حريري فاخر',
-    price: 89,
-    image: 'https://images.pexels.com/photos/8442924/pexels-photo-8442924.jpeg',
-    category: 'hijab',
-    sizes: ['One Size'],
-    colors: ['Beige', 'Rose', 'Navy', 'Black'],
-    inStock: true,
-  },
-  {
-    id: '3',
-    name: 'Modest Evening Dress',
-    name_ar: 'فستان سهرة محتشم',
-    price: 459,
-    image: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg',
-    category: 'dresses',
-    sizes: ['S', 'M', 'L'],
-    colors: ['Burgundy', 'Navy', 'Black'],
-    inStock: true,
-  },
-  {
-    id: '4',
-    name: 'Traditional Niqab',
-    name_ar: 'نقاب تقليدي',
-    price: 45,
-    image: 'https://images.pexels.com/photos/8442876/pexels-photo-8442876.jpeg',
-    category: 'niqab',
-    sizes: ['One Size'],
-    colors: ['Black'],
-    inStock: true,
-  },
-];
+interface Product {
+  id: string;
+  name: string;
+  name_ar: string;
+  price: number;
+  image: string;
+  category: string;
+  sizes: string[];
+  colors: string[];
+  inStock: boolean;
+}
 
 export default function HomePage() {
   const t = useTranslations();
   const locale = useLocale();
   const isRTL = locale === 'ar';
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('/api/products');
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data);
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const categories = [
     {
@@ -86,11 +69,11 @@ export default function HomePage() {
     },
   ];
 
+  const featuredProducts = products.filter(product => product.featured);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-
-  
 
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[500px] overflow-hidden">
@@ -166,21 +149,37 @@ export default function HomePage() {
             <div className="w-24 h-1 bg-rose-600 mx-auto rounded-full" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {sampleProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[...Array(4)].map((_, index) => (
+                <div key={index} className="bg-white rounded-lg shadow-sm animate-pulse">
+                  <div className="aspect-[3/4] bg-gray-200 rounded-t-lg"></div>
+                  <div className="p-4">
+                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {featuredProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
 
-          <div className="text-center mt-12">
-            <Link
-              href={`/${locale}/products`}
-              className="inline-flex items-center px-6 py-3 border border-rose-600 text-rose-600 font-semibold rounded-full hover:bg-rose-600 hover:text-white transition-all duration-300"
-            >
-              {t('homepage.viewAllProducts')}
-              {isRTL ? <ChevronLeft className="ml-2" size={20} /> : <ChevronRight className="ml-2" size={20} />}
-            </Link>
-          </div>
+              <div className="text-center mt-12">
+                <Link
+                  href={`/${locale}/products`}
+                  className="inline-flex items-center px-6 py-3 border border-rose-600 text-rose-600 font-semibold rounded-full hover:bg-rose-600 hover:text-white transition-all duration-300"
+                >
+                  {t('homepage.viewAllProducts')}
+                  {isRTL ? <ChevronLeft className="ml-2" size={20} /> : <ChevronRight className="ml-2" size={20} />}
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </section>
 

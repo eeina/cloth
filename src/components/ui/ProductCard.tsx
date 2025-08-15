@@ -29,13 +29,14 @@ export function ProductCard({ product }: ProductCardProps) {
 
   const productName = locale === 'ar' ? product.name_ar : product.name;
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
-    addItem({
+    await addItem({
       id: product.id,
-      name: productName,
+      name: product.name,
+      nameAr: product.name_ar,
       price: product.price,
       image: product.image,
       size: product.sizes[0] || 'M',

@@ -14,8 +14,8 @@ export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const t = useTranslations();
   const locale = useLocale();
-  const { user } = useAuth();
-  const { getItemCount } = useCart();
+  const { user, signOut } = useAuth();
+  const { getItemCount, loading } = useCart();
 
   const isRTL = locale === 'ar';
 
@@ -26,6 +26,10 @@ export function Header() {
     { key: 'dresses', href: '/categories/dresses' },
     { key: 'accessories', href: '/categories/accessories' },
   ];
+
+  const handleSignOut = () => {
+    signOut();
+  };
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-100">
@@ -94,19 +98,44 @@ export function Header() {
               className="relative p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md"
             >
               <ShoppingCart size={20} />
-              {getItemCount() > 0 && (
+              {!loading && getItemCount() > 0 && (
                 <span className="absolute -top-1 -right-1 bg-rose-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                   {getItemCount()}
                 </span>
               )}
             </Link>
 
-            <Link
-              href={user ? `/${locale}/account` : `/${locale}/auth/login`}
-              className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md"
-            >
-              <User size={20} />
-            </Link>
+            {user ? (
+              <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                <Link
+                  href={user.role === 'ADMIN' ? `/${locale}/admin` : `/${locale}/account`}
+                  className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md"
+                >
+                  <User size={20} />
+                </Link>
+                {user.role === 'ADMIN' && (
+                  <Link
+                    href={`/${locale}/admin`}
+                    className="text-sm text-rose-600 hover:text-rose-700 font-medium"
+                  >
+                    {t('navigation.admin')}
+                  </Link>
+                )}
+                <button
+                  onClick={handleSignOut}
+                  className="text-sm text-gray-600 hover:text-gray-900"
+                >
+                  {t('navigation.logout')}
+                </button>
+              </div>
+            ) : (
+              <Link
+                href={`/${locale}/auth/login`}
+                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md"
+              >
+                <User size={20} />
+              </Link>
+            )}
           </div>
         </div>
 
@@ -146,6 +175,26 @@ export function Header() {
                 {t(`navigation.${category.key}`)}
               </Link>
             ))}
+            {user && (
+              <>
+                <Link
+                  href={user.role === 'ADMIN' ? `/${locale}/admin` : `/${locale}/account`}
+                  className="block px-3 py-2 text-gray-700 hover:text-rose-600 hover:bg-gray-50 rounded-md"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {user.role === 'ADMIN' ? t('navigation.admin') : t('navigation.account')}
+                </Link>
+                <button
+                  onClick={() => {
+                    handleSignOut();
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 text-gray-700 hover:text-rose-600 hover:bg-gray-50 rounded-md"
+                >
+                  {t('navigation.logout')}
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

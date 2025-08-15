@@ -46,15 +46,15 @@ export default function RegisterPage() {
     }
 
     try {
-      const { error } = await signUp(
+      const result = await signUp(
         formData.email,
         formData.password,
         formData.firstName,
         formData.lastName
       );
       
-      if (error) {
-        setError(error.message);
+      if (!result.success) {
+        setError(result.error || 'Registration failed');
       } else {
         router.push(`/${locale}/account`);
       }
