@@ -1,17 +1,18 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
+    ignores: ['node_modules/', '.next/', 'out/'],
+  },
+  {
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
     rules: {
       // TypeScript 相关规则
       "@typescript-eslint/no-explicit-any": "off",
@@ -31,7 +32,7 @@ const eslintConfig = [
       "@next/next/no-html-link-for-pages": "off",
       
       // 一般JavaScript规则
-      "prefer-const": "off",  // 关闭prefer-const规则
+      "prefer-const": "off",
       "no-unused-vars": "off",
       "no-console": "off",
       "no-debugger": "off",
