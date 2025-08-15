@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from './AuthProvider';
+import { useAuth } from '@/components/providers/AuthProvider';
 
 interface AdminRouteProps {
   children: React.ReactNode;
