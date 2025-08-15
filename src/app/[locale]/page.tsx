@@ -61,11 +61,7 @@ export default function HomePage() {
   const locale = useLocale();
   const isRTL = locale === 'ar';
 
-  // Debug: Log the translations and locale
-  console.log('DEBUG: Page locale:', locale);
-  console.log('DEBUG: Translation function type:', typeof t);
-  console.log('DEBUG: Sample translation - heroTitle:', t('homepage.heroTitle'));
-  console.log('DEBUG: Sample translation - navigation.home:', t('navigation.home'));
+  
 
   const categories = [
     {
@@ -94,31 +90,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
 
-      {/* Debug Section */}
-      <section className="py-8 bg-yellow-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              DEBUG SECTION
-            </h2>
-            <p className="text-lg text-gray-700 mb-2">
-              Current locale: {locale}
-            </p>
-            <p className="text-lg text-gray-700 mb-2">
-              Is RTL: {isRTL ? 'Yes' : 'No'}
-            </p>
-            <p className="text-lg text-gray-700 mb-2">
-              Hero Title Translation: {t('homepage.heroTitle')}
-            </p>
-            <p className="text-lg text-gray-700 mb-2">
-              Hardcoded Arabic: أزياء أنيقة للمرأة السعودية العصرية
-            </p>
-            <p className="text-lg text-gray-700">
-              Navigation Home: {t('navigation.home')}
-            </p>
-          </div>
-        </div>
-      </section>
+  
 
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[500px] overflow-hidden">
