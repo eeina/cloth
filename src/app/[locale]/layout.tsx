@@ -3,6 +3,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { ReactNode } from 'react';
 import { Providers } from '@/components/providers/Providers';
+import '../globals.css';
 
 const locales = ['en', 'ar'];
 
