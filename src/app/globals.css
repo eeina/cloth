@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-arabic: 'Noto Sans Arabic', sans-serif;
+  --font-english: 'Inter', sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-english);
+  }
+  
+  html[lang="ar"] {
+    font-family: var(--font-arabic);
+    direction: rtl;
+  }
+  
+  html[lang="en"] {
+    font-family: var(--font-english);
+    direction: ltr;
+  }
+}
+
+@layer components {
+  .rtl-flip {
+    transform: scaleX(-1);
+  }
+  
+  .product-image-zoom {
+    transition: transform 0.3s ease;
+  }
+  
+  .product-image-zoom:hover {
+    transform: scale(1.05);
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}

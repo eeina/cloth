@@ -1,0 +1,107 @@
+{
+  "navigation": {
+    "home": "الرئيسية",
+    "categories": "الفئات",
+    "hijab": "حجاب",
+    "niqab": "نقاب",
+    "abaya": "عباءة",
+    "dresses": "فساتين",
+    "accessories": "إكسسوارات",
+    "cart": "السلة",
+    "account": "الحساب",
+    "admin": "الإدارة",
+    "login": "تسجيل الدخول",
+    "register": "التسجيل",
+    "logout": "تسجيل الخروج"
+  },
+  "homepage": {
+    "heroTitle": "أزياء أنيقة للمرأة السعودية العصرية",
+    "heroSubtitle": "اكتشفي مجموعتنا الرائعة من قطع الأزياء المحتشمة المصممة للمرأة السعودية المعاصرة",
+    "shopNow": "تسوقي الآن",
+    "featuredProducts": "المنتجات المميزة",
+    "categories": "تسوقي حسب الفئة",
+    "offers": "العروض الخاصة",
+    "newsletter": "اشتركي في نشرتنا الإخبارية",
+    "newsletterText": "احصلي على أحدث المستجدات حول الوصولات الجديدة والعروض الحصرية"
+  },
+  "product": {
+    "price": "السعر",
+    "sar": "ريال",
+    "size": "المقاس",
+    "color": "اللون",
+    "inStock": "متوفر",
+    "outOfStock": "غير متوفر",
+    "addToCart": "أضيفي إلى السلة",
+    "description": "الوصف",
+    "reviews": "التقييمات",
+    "relatedProducts": "منتجات ذات صلة"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "empty": "سلة التسوق فارغة",
+    "continueShopping": "متابعة التسوق",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "total": "الإجمالي",
+    "proceedToCheckout": "إتمام الطلب",
+    "remove": "إزالة",
+    "quantity": "الكمية"
+  },
+  "checkout": {
+    "title": "إتمام الطلب",
+    "guestCheckout": "طلب كضيف",
+    "memberCheckout": "طلب كعضو",
+    "paymentMethod": "طريقة الدفع",
+    "cashOnDelivery": "الدفع عند الاستلام",
+    "bankTransfer": "تحويل بنكي",
+    "shippingAddress": "عنوان الشحن",
+    "placeOrder": "تأكيد الطلب"
+  },
+  "auth": {
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "createAccount": "إنشاء حساب",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "forgotPassword": "نسيت كلمة المرور؟"
+  },
+  "account": {
+    "profile": "الملف الشخصي",
+    "orders": "الطلبات",
+    "addresses": "العناوين",
+    "settings": "الإعدادات",
+    "orderHistory": "سجل الطلبات",
+    "savedAddresses": "العناوين المحفوظة",
+    "addNewAddress": "إضافة عنوان جديد"
+  },
+  "admin": {
+    "dashboard": "لوحة التحكم",
+    "products": "المنتجات",
+    "categories": "الفئات",
+    "orders": "الطلبات",
+    "users": "المستخدمين",
+    "content": "المحتوى",
+    "analytics": "التحليلات"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "view": "عرض",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "search": "بحث",
+    "filter": "تصفية",
+    "sort": "ترتيب",
+    "currency": "ريال"
+  }
+}

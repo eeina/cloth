@@ -1,0 +1,107 @@
+{
+  "navigation": {
+    "home": "Home",
+    "categories": "Categories",
+    "hijab": "Hijab",
+    "niqab": "Niqab",
+    "abaya": "Abaya",
+    "dresses": "Dresses",
+    "accessories": "Accessories",
+    "cart": "Cart",
+    "account": "Account",
+    "admin": "Admin",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "homepage": {
+    "heroTitle": "Elegant Fashion for Modern Saudi Women",
+    "heroSubtitle": "Discover our exquisite collection of modest fashion pieces designed for the contemporary Saudi woman",
+    "shopNow": "Shop Now",
+    "featuredProducts": "Featured Products",
+    "categories": "Shop by Category",
+    "offers": "Special Offers",
+    "newsletter": "Subscribe to our Newsletter",
+    "newsletterText": "Get the latest updates on new arrivals and exclusive offers"
+  },
+  "product": {
+    "price": "Price",
+    "sar": "SAR",
+    "size": "Size",
+    "color": "Color",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "addToCart": "Add to Cart",
+    "description": "Description",
+    "reviews": "Reviews",
+    "relatedProducts": "Related Products"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "Continue Shopping",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total",
+    "proceedToCheckout": "Proceed to Checkout",
+    "remove": "Remove",
+    "quantity": "Quantity"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "guestCheckout": "Guest Checkout",
+    "memberCheckout": "Member Checkout",
+    "paymentMethod": "Payment Method",
+    "cashOnDelivery": "Cash on Delivery",
+    "bankTransfer": "Bank Transfer",
+    "shippingAddress": "Shipping Address",
+    "placeOrder": "Place Order"
+  },
+  "auth": {
+    "email": "Email",
+    "phone": "Phone",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "createAccount": "Create Account",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "forgotPassword": "Forgot Password?"
+  },
+  "account": {
+    "profile": "Profile",
+    "orders": "Orders",
+    "addresses": "Addresses",
+    "settings": "Settings",
+    "orderHistory": "Order History",
+    "savedAddresses": "Saved Addresses",
+    "addNewAddress": "Add New Address"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "categories": "Categories",
+    "orders": "Orders",
+    "users": "Users",
+    "content": "Content",
+    "analytics": "Analytics"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "currency": "SAR"
+  }
+}
