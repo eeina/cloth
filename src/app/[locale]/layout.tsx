@@ -27,7 +27,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-      <body className={`${locale === 'ar' ? 'font-arabic' : 'font-english'} antialiased bg-gray-50`}>
+      <body className={`${locale === 'ar' ? 'font-arabic' : 'font-english'} antialiased bg-background`}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
             {children}
