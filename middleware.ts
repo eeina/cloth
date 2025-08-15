@@ -17,5 +17,12 @@ export const config = {
   // - _next/static (static files)
   // - _next/image (image optimization files)
   // - favicon.ico (favicon file)
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
+  matcher: [
+    // Match all pathnames except for the ones starting with the specified patterns
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    // Explicitly match the root path
+    '/',
+    // Match all locale paths
+    '/(ar|en)/:path*'
+  ]
 };
