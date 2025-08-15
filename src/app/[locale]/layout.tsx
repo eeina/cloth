@@ -1,5 +1,4 @@
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { ReactNode } from 'react';
 import { Providers } from '@/components/providers/Providers';
@@ -22,8 +21,8 @@ export default async function LocaleLayout({
   // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale)) notFound();
 
-  // Providing all messages to the client side is the easiest way to get started
-  const messages = await getMessages();
+  // Manually load the messages for the specific locale
+  const messages = (await import(`../../../messages/${locale}.json`)).default;
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
