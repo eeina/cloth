@@ -1,8 +1,18 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { supabase } from '@/lib/supabase';
-import type { User } from '@supabase/supabase-js';
+// import { supabase } from '@/lib/supabase';
+// import type { User } from '@supabase/supabase-js';
+
+// Mock user type for demo
+type User = {
+  id: string;
+  email: string;
+  user_metadata?: {
+    first_name?: string;
+    last_name?: string;
+  };
+};
 
 interface AuthContextType {
   user: User | null;
@@ -19,48 +29,64 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setUser(session?.user ?? null);
-        setLoading(false);
-      }
-    );
-
-    return () => subscription.unsubscribe();
+    // Mock authentication for demo
+    const mockUser = localStorage.getItem('mockUser');
+    if (mockUser) {
+      setUser(JSON.parse(mockUser));
+    }
+    setLoading(false);
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    return { data, error };
+    // Mock sign in for demo
+    if (email === 'admin@elegant.sa' && password === 'admin123') {
+      const mockUser = {
+        id: '1',
+        email: 'admin@elegant.sa',
+        user_metadata: {
+          first_name: 'Admin',
+          last_name: 'User',
+        },
+      };
+      setUser(mockUser);
+      localStorage.setItem('mockUser', JSON.stringify(mockUser));
+      return { data: { user: mockUser }, error: null };
+    } else if (email && password) {
+      const mockUser = {
+        id: '2',
+        email: email,
+        user_metadata: {
+          first_name: 'User',
+          last_name: 'Demo',
+        },
+      };
+      setUser(mockUser);
+      localStorage.setItem('mockUser', JSON.stringify(mockUser));
+      return { data: { user: mockUser }, error: null };
+    }
+    return { data: null, error: { message: 'Invalid credentials' } };
   };
 
   const signUp = async (email: string, password: string, firstName: string, lastName: string) => {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          first_name: firstName,
-          last_name: lastName,
-        }
-      }
-    });
-    return { data, error };
+    // Mock sign up for demo
+    const mockUser = {
+      id: Date.now().toString(),
+      email: email,
+      user_metadata: {
+        first_name: firstName,
+        last_name: lastName,
+      },
+    };
+    setUser(mockUser);
+    localStorage.setItem('mockUser', JSON.stringify(mockUser));
+    return { data: { user: mockUser }, error: null };
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    return { error };
+    // Mock sign out for demo
+    setUser(null);
+    localStorage.removeItem('mockUser');
+    return { error: null };
   };
 
   const value = {
