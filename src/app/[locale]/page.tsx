@@ -173,7 +173,7 @@ export default function HomePage() {
               href={`/${locale}/products`}
               className="inline-flex items-center px-6 py-3 border border-rose-600 text-rose-600 font-semibold rounded-full hover:bg-rose-600 hover:text-white transition-all duration-300"
             >
-              {locale === 'ar' ? 'عرض جميع المنتجات' : 'View All Products'}
+              {t('homepage.viewAllProducts')}
               {isRTL ? <ChevronLeft className="ml-2" size={20} /> : <ChevronRight className="ml-2" size={20} />}
             </Link>
           </div>
@@ -187,16 +187,13 @@ export default function HomePage() {
             {t('homepage.offers')}
           </h2>
           <p className="text-lg mb-8 opacity-90">
-            {locale === 'ar' 
-              ? 'خصومات تصل إلى 50% على مجموعة مختارة من المنتجات'
-              : 'Up to 50% off on selected items'
-            }
+            {t('homepage.offersText')}
           </p>
           <Link
             href={`/${locale}/offers`}
             className="inline-flex items-center px-8 py-4 bg-white text-rose-600 font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
           >
-            {locale === 'ar' ? 'تسوقي العروض' : 'Shop Offers'}
+            {t('homepage.shopOffers')}
           </Link>
         </div>
       </section>
@@ -213,13 +210,13 @@ export default function HomePage() {
           <div className="flex max-w-md mx-auto">
             <input
               type="email"
-              placeholder={locale === 'ar' ? 'أدخلي بريدك الإلكتروني' : 'Enter your email'}
+              placeholder={t('homepage.enterEmail')}
               className={`flex-1 px-4 py-3 border border-gray-300 rounded-l-full ${isRTL ? 'rounded-r-full rounded-l-none' : ''} focus:ring-2 focus:ring-rose-500 focus:border-transparent`}
             />
             <button
               className={`px-6 py-3 bg-rose-600 text-white font-semibold rounded-r-full ${isRTL ? 'rounded-l-full rounded-r-none' : ''} hover:bg-rose-700 transition-colors`}
             >
-              {locale === 'ar' ? 'اشتراك' : 'Subscribe'}
+              {t('homepage.subscribe')}
             </button>
           </div>
         </div>

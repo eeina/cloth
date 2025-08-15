@@ -1,8 +1,8 @@
-// server.js - Next.js Standalone + Socket.IO
-const { setupSocket } = require('./src/lib/socket.js');
-const { createServer } = require('http');
-const { Server } = require('socket.io');
-const next = require('next');
+// server.ts - Next.js Standalone + Socket.IO
+import { setupSocket } from './src/lib/socket';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import next from 'next';
 
 const dev = process.env.NODE_ENV !== 'production';
 const currentPort = 3000;

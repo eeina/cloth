@@ -40,7 +40,7 @@ export default function RegisterPage() {
     setError('');
 
     if (formData.password !== formData.confirmPassword) {
-      setError(locale === 'ar' ? 'كلمات المرور غير متطابقة' : 'Passwords do not match');
+      setError(t('auth.passwordsDoNotMatch'));
       setLoading(false);
       return;
     }
@@ -76,10 +76,7 @@ export default function RegisterPage() {
               {t('navigation.register')}
             </h1>
             <p className="text-gray-600">
-              {locale === 'ar' 
-                ? 'أنشئي حساباً جديداً للاستمتاع بتجربة تسوق مميزة'
-                : 'Create a new account for a personalized shopping experience'
-              }
+              {t('auth.personalizedShopping')}
             </p>
           </div>
 

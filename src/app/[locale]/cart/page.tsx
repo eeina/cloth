@@ -27,10 +27,7 @@ export default function CartPage() {
               {t('cart.empty')}
             </h1>
             <p className="text-gray-600 mb-8">
-              {locale === 'ar' 
-                ? 'ابدئي بإضافة بعض المنتجات الرائعة إلى سلة التسوق'
-                : 'Start adding some amazing products to your cart'
-              }
+              {t('cart.emptyMessage')}
             </p>
             <Link
               href={`/${locale}`}
@@ -115,7 +112,7 @@ export default function CartPage() {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-sm p-6 sticky top-8">
               <h2 className="text-xl font-bold text-gray-900 mb-6">
-                {locale === 'ar' ? 'ملخص الطلب' : 'Order Summary'}
+                {t('cart.orderSummary')}
               </h2>
 
               <div className="space-y-4">

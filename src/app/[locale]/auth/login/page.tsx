@@ -61,10 +61,7 @@ export default function LoginPage() {
               {t('navigation.login')}
             </h1>
             <p className="text-gray-600">
-              {locale === 'ar' 
-                ? 'أدخلي بياناتك لتسجيل الدخول'
-                : 'Enter your credentials to sign in'
-              }
+              {t('auth.enterCredentials')}
             </p>
           </div>
 

@@ -21,8 +21,13 @@
     "featuredProducts": "المنتجات المميزة",
     "categories": "تسوقي حسب الفئة",
     "offers": "العروض الخاصة",
+    "offersText": "خصومات تصل إلى 50% على مجموعة مختارة من المنتجات",
+    "shopOffers": "تسوقي العروض",
+    "viewAllProducts": "عرض جميع المنتجات",
     "newsletter": "اشتركي في نشرتنا الإخبارية",
-    "newsletterText": "احصلي على أحدث المستجدات حول الوصولات الجديدة والعروض الحصرية"
+    "newsletterText": "احصلي على أحدث المستجدات حول الوصولات الجديدة والعروض الحصرية",
+    "enterEmail": "أدخلي بريدك الإلكتروني",
+    "subscribe": "اشتراك"
   },
   "product": {
     "price": "السعر",
@@ -39,13 +44,15 @@
   "cart": {
     "title": "سلة التسوق",
     "empty": "سلة التسوق فارغة",
+    "emptyMessage": "ابدئي بإضافة بعض المنتجات الرائعة إلى سلة التسوق",
     "continueShopping": "متابعة التسوق",
     "subtotal": "المجموع الفرعي",
     "shipping": "الشحن",
     "total": "الإجمالي",
     "proceedToCheckout": "إتمام الطلب",
     "remove": "إزالة",
-    "quantity": "الكمية"
+    "quantity": "الكمية",
+    "orderSummary": "ملخص الطلب"
   },
   "checkout": {
     "title": "إتمام الطلب",
@@ -67,7 +74,11 @@
     "createAccount": "إنشاء حساب",
     "alreadyHaveAccount": "لديك حساب بالفعل؟",
     "dontHaveAccount": "ليس لديك حساب؟",
-    "forgotPassword": "نسيت كلمة المرور؟"
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "enterCredentials": "أدخلي بياناتك لتسجيل الدخول",
+    "createNewAccount": "أنشئي حسابك الجديد",
+    "passwordsDoNotMatch": "كلمات المرور غير متطابقة",
+    "personalizedShopping": "أنشئي حساباً جديداً للاستمتاع بتجربة تسوق مميزة"
   },
   "account": {
     "profile": "الملف الشخصي",
