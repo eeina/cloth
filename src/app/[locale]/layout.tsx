@@ -1,4 +1,5 @@
 import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { ReactNode } from 'react';
 import { Providers } from '@/components/providers/Providers';
@@ -18,11 +19,19 @@ export default async function LocaleLayout({
   // Await the params object as required by Next.js 15
   const { locale } = await params;
   
+  // Debug: Log the locale parameter
+  console.log('DEBUG: Layout received locale:', locale);
+  
   // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale)) notFound();
 
-  // Manually load the messages for the specific locale
-  const messages = (await import(`../../../messages/${locale}.json`)).default;
+  // Try to get messages using the standard approach
+  const messages = await getMessages();
+  
+  // Debug: Log the messages being loaded
+  console.log('DEBUG: getMessages() returned keys:', Object.keys(messages));
+  console.log('DEBUG: Sample navigation keys:', Object.keys(messages.navigation || {}));
+  console.log('DEBUG: Sample homepage keys:', Object.keys(messages.homepage || {}));
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
