@@ -9,13 +9,16 @@ const locales = ['en', 'ar'];
 
 type Props = {
   children: ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function LocaleLayout({
   children,
-  params: { locale }
+  params
 }: Props) {
+  // Await the params object as required by Next.js 15
+  const { locale } = await params;
+  
   // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale)) notFound();
 
